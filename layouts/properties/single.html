@@ -1,0 +1,65 @@
+{{ define "main" }}
+<section class="property-hero">
+  <div class="container">
+    <a href="{{ "properties/" | relURL }}" class="back-link">&larr; Back to Properties</a>
+    <div class="property-hero-content">
+      <span class="property-tag tag-{{ .Params.type | urlize }}">{{ .Params.type }}</span>
+      <h1>{{ .Title }}</h1>
+      <p class="property-address-lg">{{ .Params.address }}</p>
+      <div class="property-price-lg">${{ .Params.price }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container property-detail-grid">
+    <div class="property-main">
+      <div class="property-image-large">
+        <svg viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="450" fill="#e8e0d4"/>
+          <path d="M320 300 L400 180 L480 300Z" fill="#c4b49a"/>
+          <path d="M240 300 L340 200 L440 300Z" fill="#b0a08a"/>
+          <rect x="370" y="240" width="60" height="60" fill="#8a7a6a"/>
+          <rect x="200" y="300" width="400" height="8" fill="#a09080"/>
+        </svg>
+      </div>
+
+      <div class="detail-stats">
+        {{ with .Params.beds }}<div class="detail-stat"><strong>{{ . }}</strong><span>Bedrooms</span></div>{{ end }}
+        {{ with .Params.baths }}<div class="detail-stat"><strong>{{ . }}</strong><span>Bathrooms</span></div>{{ end }}
+        {{ with .Params.sqft }}<div class="detail-stat"><strong>{{ . }}</strong><span>Sq Ft</span></div>{{ end }}
+        {{ with .Params.type }}<div class="detail-stat"><strong>{{ . }}</strong><span>Type</span></div>{{ end }}
+        {{ with .Params.status }}<div class="detail-stat"><strong>{{ . }}</strong><span>Status</span></div>{{ end }}
+      </div>
+
+      <div class="property-description">
+        <h2>Description</h2>
+        {{ .Content }}
+      </div>
+
+      {{ with .Params.features }}
+      <div class="property-features">
+        <h2>Features</h2>
+        <ul class="features-list">
+          {{ range . }}
+          <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    </div>
+
+    <aside class="property-sidebar">
+      <div class="inquiry-card">
+        <h3>Interested in this property?</h3>
+        <p>Contact us to schedule a viewing or learn more about this listing.</p>
+        <a href="{{ "contact/" | relURL }}" class="btn btn-primary btn-block">Schedule a Viewing</a>
+        <div class="inquiry-contact">
+          <p><strong>Call us:</strong> {{ .Site.Params.phone }}</p>
+          <p><strong>Email:</strong> {{ .Site.Params.email }}</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+{{ end }}

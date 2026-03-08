@@ -1,0 +1,64 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="page-subtitle">{{ . }}</p>{{ end }}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="property-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="for sale">For Sale</button>
+      <button class="filter-btn" data-filter="for rent">For Rent</button>
+      <button class="filter-btn" data-filter="investment">Investment</button>
+    </div>
+    <div class="property-grid">
+      {{ range .Pages }}
+      <div class="property-card" data-type="{{ .Params.type }}">
+        <div class="property-image">
+          <span class="property-tag tag-{{ .Params.type | urlize }}">{{ .Params.type }}</span>
+          <div class="property-image-placeholder">
+            <svg viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="260" fill="#e8e0d4"/>
+              <path d="M160 170 L200 110 L240 170Z" fill="#c4b49a"/>
+              <path d="M120 170 L170 120 L220 170Z" fill="#b0a08a"/>
+              <rect x="185" y="140" width="30" height="30" fill="#8a7a6a"/>
+              <rect x="100" y="170" width="200" height="5" fill="#a09080"/>
+            </svg>
+          </div>
+        </div>
+        <div class="property-info">
+          <div class="property-price">${{ .Params.price }}</div>
+          <h3 class="property-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="property-address">{{ .Params.address }}</p>
+          <div class="property-details">
+            {{ with .Params.beds }}<span>{{ . }} Beds</span>{{ end }}
+            {{ with .Params.baths }}<span>{{ . }} Baths</span>{{ end }}
+            {{ with .Params.sqft }}<span>{{ . }} Sqft</span>{{ end }}
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.filter;
+    document.querySelectorAll('.property-card').forEach(card => {
+      if (filter === 'all' || card.dataset.type.toLowerCase() === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+{{ end }}

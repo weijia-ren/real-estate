@@ -1,0 +1,45 @@
+baseURL = "https://weijia-ren.github.io/real-estate/"
+languageCode = "en-us"
+title = "Summit Realty Group"
+
+[params]
+  description = "Your trusted partner in real estate — buying, selling, investing, and property management."
+  tagline = "Building Wealth Through Real Estate"
+  phone = "(555) 123-4567"
+  email = "info@summitrealty.com"
+  address = "100 Commerce Drive, Suite 200, Austin, TX 78701"
+  officeHours = "Mon–Fri 9AM–6PM | Sat 10AM–4PM"
+  propertiesManaged = "200+"
+  yearsExperience = "15+"
+  clientsServed = "500+"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Properties"
+    url = "/properties/"
+    weight = 2
+  [[menu.main]]
+    name = "Services"
+    url = "/services/"
+    weight = 3
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 4
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  tag = "tags"
+  type = "types"

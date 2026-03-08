@@ -1,0 +1,169 @@
+{{ define "main" }}
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Your Trusted Partner in Real Estate</h1>
+    <p class="hero-tagline">Whether you're buying your dream home, growing your investment portfolio, or need expert property management — we deliver results.</p>
+    <div class="hero-cta">
+      <a href="{{ "properties/" | relURL }}" class="btn btn-primary">View Properties</a>
+      <a href="{{ "services/" | relURL }}" class="btn btn-secondary">Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="stats-bar">
+  <div class="container stats-grid">
+    <div class="stat">
+      <span class="stat-number">{{ .Site.Params.propertiesManaged }}</span>
+      <span class="stat-label">Properties Managed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">{{ .Site.Params.yearsExperience }}</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">{{ .Site.Params.clientsServed }}</span>
+      <span class="stat-label">Clients Served</span>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Properties -->
+<section class="section featured-properties">
+  <div class="container">
+    <h2 class="section-title">Featured Properties</h2>
+    <p class="section-subtitle">Explore our latest listings and investment opportunities</p>
+    <div class="property-grid">
+      {{ range first 3 (where .Site.RegularPages "Section" "properties") }}
+      <div class="property-card">
+        <div class="property-image">
+          <span class="property-tag tag-{{ .Params.type | urlize }}">{{ .Params.type }}</span>
+          <div class="property-image-placeholder">
+            <svg viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="260" fill="#e8e0d4"/>
+              <path d="M160 170 L200 110 L240 170Z" fill="#c4b49a"/>
+              <path d="M120 170 L170 120 L220 170Z" fill="#b0a08a"/>
+              <rect x="185" y="140" width="30" height="30" fill="#8a7a6a"/>
+              <rect x="100" y="170" width="200" height="5" fill="#a09080"/>
+            </svg>
+          </div>
+        </div>
+        <div class="property-info">
+          <div class="property-price">${{ .Params.price }}</div>
+          <h3 class="property-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="property-address">{{ .Params.address }}</p>
+          <div class="property-details">
+            {{ with .Params.beds }}<span>{{ . }} Beds</span>{{ end }}
+            {{ with .Params.baths }}<span>{{ . }} Baths</span>{{ end }}
+            {{ with .Params.sqft }}<span>{{ . }} Sqft</span>{{ end }}
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    <div class="section-cta">
+      <a href="{{ "properties/" | relURL }}" class="btn btn-outline">View All Properties</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Overview -->
+<section class="section services-overview">
+  <div class="container">
+    <h2 class="section-title">What We Do</h2>
+    <p class="section-subtitle">Comprehensive real estate services tailored to your needs</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4L4 20H10V40H20V28H28V40H38V20H44L24 4Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <h3>Buying &amp; Selling</h3>
+        <p>Expert guidance through every step of your real estate transaction, from market analysis to closing day.</p>
+        <a href="{{ "services/buying-selling/" | relURL }}" class="service-link">Learn More &rarr;</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="22" width="36" height="22" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M16 22V14C16 9.58 19.58 6 24 6C28.42 6 32 9.58 32 14V22" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="24" cy="33" r="3" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Property Investment</h3>
+        <p>Strategic investment opportunities to build long-term wealth through carefully vetted properties.</p>
+        <a href="{{ "services/property-investment/" | relURL }}" class="service-link">Learn More &rarr;</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="36" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M6 18H42M18 18V42" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            <circle cx="30" cy="30" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Property Management</h3>
+        <p>Full-service management so you can enjoy ownership without the day-to-day hassle.</p>
+        <a href="{{ "services/property-management/" | relURL }}" class="service-link">Learn More &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials">
+  <div class="container">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <blockquote>
+          <p>"Summit Realty made buying our first home a breeze. Their knowledge of the local market is unmatched, and they were with us every step of the way."</p>
+        </blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">JM</div>
+          <div>
+            <strong>James Mitchell</strong>
+            <span>First-Time Homebuyer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <blockquote>
+          <p>"I've trusted them with my investment portfolio for over 5 years. The returns have been excellent, and their property management is top-notch."</p>
+        </blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">SC</div>
+          <div>
+            <strong>Sarah Chen</strong>
+            <span>Real Estate Investor</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <blockquote>
+          <p>"Professional, responsive, and genuinely caring. They sold our home above asking price in under two weeks. Highly recommended!"</p>
+        </blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">DR</div>
+          <div>
+            <strong>David Rodriguez</strong>
+            <span>Home Seller</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <p>Let's discuss your real estate goals. Schedule a free consultation today.</p>
+    <a href="{{ "contact/" | relURL }}" class="btn btn-primary">Contact Us</a>
+  </div>
+</section>
+{{ end }}
